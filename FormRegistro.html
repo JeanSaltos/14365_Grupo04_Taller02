@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dirección de envío</title>
+  <style>
+    .confidential-form {
+      display: none;
+      float: inline-start;
+      float: right; /* Agregado para posicionar a la derecha */
+      margin-right: 600px; /* Agregado para dar espacio a la derecha */
+      margin-bottom: 900px;
+    }
+
+    .confidential-form label,
+    .confidential-form input,
+    .confidential-form button {
+      /* display: block; */
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Dirección de envío</h2>
+  <div class="form">
+    <form id="shipping-form">
+        <label for="callePrincipal">Calle Principal:</label>
+        <input type="text" id="callePrincipal" name="callePrincipal" required><br><br>
+    
+        <label for="calleTransversal">Calle Transversal:</label>
+        <input type="text" id="calleTransversal" name="calleTransversal" required><br><br>
+    
+        <input type="checkbox" id="entregaPropietario" name="entrega" onchange="checkUncheck(this)">
+        <label for="entregaPropietario">Entrega al Propietario</label><br><br>
+    
+        <input type="checkbox" id="entregaTerceros" name="entrega" onchange="checkUncheck(this)">
+        <label for="entregaTerceros">Entrega a Terceros</label><br><br>
+        <label for="cantones">Cantón:</label>
+            <select id="cantones" name="cantones">
+              <option value="Mejia">Mejía</option>
+              <option value="Ruminahui">Rumiñahui</option>
+              <option value="Quito">Quito</option>
+              <option value="PedroMoncayo">Pedro Moncayo</option>
+              <option value="Cayambe">Cayambe</option>
+              <option value="SanMiguelBancos">San Miguel de los Bancos</option>
+              <option value="PuertoQuito">Puerto Quito</option>
+              <option value="PedroVicenteMaldonado">Pedro Vicente Maldonado</option>
+            </select>
+    
+        <div class="confidential-form">
+          <h3>Información Confidencial</h3>
+          <label for="codigoPostal">Código Postal:</label>
+          <input type="text" id="codigoPostal" name="codigoPostal"><br>
+    
+          <label for="referenciaDireccion">Referencia de Dirección:</label>
+          <input type="text" id="referenciaDireccion" name="referenciaDireccion"><br>
+    
+          <button type="button" onclick="guardarInformacionConfidencial()">Guardar</button>
+        </div>
+        <br>
+        <br>
+        <button type="submit" id="enviarDatos" disabled>ENVIAR DATOS</button>
+      </form>
+    
+
+  </div>
+
+  
+  <script>
+    function checkUncheck(checkbox) {
+      var checkboxes = document.getElementsByName(checkbox.name);
+
+      checkboxes.forEach(function (cb) {
+        if (cb !== checkbox) {
+          cb.checked = false;
+        }
+      });
+
+      habilitarEnviar();
+      mostrarFormularioConfidencial();
+    }
+
+    function habilitarEnviar() {
+      var entregaPropietarioCheckbox = document.getElementById("entregaPropietario");
+      var entregaTercerosCheckbox = document.getElementById("entregaTerceros");
+      var enviarDatosButton = document.getElementById("enviarDatos");
+
+      enviarDatosButton.disabled = !(entregaPropietarioCheckbox.checked || entregaTercerosCheckbox.checked);
+    }
+
+    function mostrarFormularioConfidencial() {
+      var entregaTercerosCheckbox = document.getElementById("entregaTerceros");
+      var confidentialForm = document.querySelector(".confidential-form");
+
+      confidentialForm.style.display = entregaTercerosCheckbox.checked ? "block" : "none";
+    }
+
+    function guardarInformacionConfidencial() {
+      // Lógica para guardar la información confidencial
+      alert("Información Confidencial Guardada");
+    }
+  </script>
+
+</body>
+</html>

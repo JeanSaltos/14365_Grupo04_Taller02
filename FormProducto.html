@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario de Producto</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    #formulario {
+      border: 1px solid black;
+      padding: 20px;
+      margin: 20px;
+      display: inline-block;
+    }
+
+    #formularioConfidencial {
+      border: 1px solid black;
+      padding: 20px;
+      margin: 20px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div id="formulario">
+  <h2>Datos Básicos</h2>
+  <form action="#" method="post" id="formPrincipal">
+    <label for="nombreProducto">Nombre del Producto:</label>
+    <input type="text" id="nombreProducto" name="nombreProducto" required><br>
+
+    <label for="descripcionProducto">Descripción del Producto:</label>
+    <textarea id="descripcionProducto" name="descripcionProducto" rows="4" required></textarea><br>
+
+    <label for="fotoProducto">Foto del Producto:</label>
+    <input type="file" id="fotoProducto" name="fotoProducto" accept="image/*"><br>
+
+    <input type="checkbox" id="infoConfidencial" name="infoConfidencial" onclick="mostrarOcultarFormulario()">
+    <label for="infoConfidencial">Añadir información confidencial</label>
+  </form>
+</div>
+
+<div id="formularioConfidencial">
+  <h2>Información Confidencial</h2>
+  <form action="#" method="post">
+    <label for="precio">Precio:</label>
+    <input type="number" id="precio" name="precio" step="0.01" required>
+    <span>$</span><br>
+
+    <label for="impuestos">Impuestos:</label>
+    <select id="impuestos" name="impuestos">
+      <option value="4">4%</option>
+      <option value="6">6%</option>
+      <option value="8">8%</option>
+      <option value="12">12%</option>
+    </select><br>
+
+    <label for="promocion">Promoción:</label>
+    <select id="promocion" name="promocion">
+      <option value="ninguno">Ninguno</option>
+      <option value="transporteGratis">Transporte Gratuito</option>
+      <option value="descuento5">Descuento 5%</option>
+    </select><br>
+
+    <button type="button" onclick="guardarCambios()">Guardar Cambios</button>
+    <button type="button" onclick="borrarDatos()">Borrar Datos</button>
+  </form>
+</div>
+
+<script>
+  function mostrarOcultarFormulario() {
+    var formularioConfidencial = document.getElementById("formularioConfidencial");
+    var checkbox = document.getElementById("infoConfidencial");
+
+    formularioConfidencial.style.display = checkbox.checked ? "inline-block" : "none";
+  }
+
+  function guardarCambios() {
+    alert("La información ha sido guardada con éxito");
+  }
+
+  function borrarDatos() {
+    document.getElementById("formPrincipal").reset();
+    document.querySelector("#formularioConfidencial form").reset();
+
+    alert("Datos borrados con éxito");
+  }
+</script>
+
+</body>
+</html>
